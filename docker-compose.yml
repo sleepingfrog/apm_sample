@@ -37,6 +37,7 @@ x-backend: &backend
     EDITOR: vi
     ELASTICSEARCH_HOST: elasticsearch
     ELASTICSEARCH_PORT: 9200
+    APM_SERVER_URL: http://apm:8200
   depends_on:
     postgres:
       condition: service_healthy

@@ -1,0 +1,2 @@
+server_url: <%= ENV['APM_SERVER_URL'] %>
+secret_token: ''
