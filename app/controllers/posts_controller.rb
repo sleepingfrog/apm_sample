@@ -71,6 +71,14 @@ class PostsController < ApplicationController
     render plain: 'heavy'
   end
 
+  def sometime_heavy
+    if Random.rand(1..10)  > 7
+      sleep 5
+    end
+
+    render plain: 'sometime heavy'
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post

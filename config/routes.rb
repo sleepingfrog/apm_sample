@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     collection do
       get :error
       get :heavy
+      get :sometime_heavy
     end
   end
 end
