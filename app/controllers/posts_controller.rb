@@ -79,6 +79,14 @@ class PostsController < ApplicationController
     render plain: 'sometime heavy'
   end
 
+  def enqueue_job
+    10000.times do
+      RapidJob.perform_later
+      HeavyJob.perform_later
+    end
+    redirect_to posts_path
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post
