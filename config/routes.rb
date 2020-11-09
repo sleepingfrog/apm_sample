@@ -5,6 +5,11 @@ Rails.application.routes.draw do
       get :error
       get :heavy
       get :sometime_heavy
+      get :enqueue_job
     end
+  end
+
+  if Rails.env.development?
+    mount Sidekiq::Web, at: '/sidekiq'
   end
 end
