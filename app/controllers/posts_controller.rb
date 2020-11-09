@@ -61,6 +61,16 @@ class PostsController < ApplicationController
     end
   end
 
+  class SampleError < StandardError; end
+  def error
+    raise SampleError
+  end
+
+  def heavy
+    sleep 10
+    render plain: 'heavy'
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post
