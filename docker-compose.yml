@@ -13,7 +13,7 @@ x-app: &app
   environment: &env
     NODE_ENV: development
     RAILS_ENV: ${RAILS_ENV:-development}
-  image: es_sample
+  image: apm_sample
   tmpfs:
     - /tmp
 
