@@ -38,10 +38,13 @@ x-backend: &backend
     ELASTICSEARCH_HOST: elasticsearch
     ELASTICSEARCH_PORT: 9200
     APM_SERVER_URL: http://apm:8200
+    REDIS_URL: redis://redis:6379
   depends_on:
     postgres:
       condition: service_healthy
     apm:
+      condition: service_healthy
+    redis:
       condition: service_healthy
 
 services:
@@ -142,6 +145,21 @@ services:
       kibana:
         condition: service_healthy
 
+  redis:
+    image: redis:5
+    volumes:
+      - redis:/data
+    ports:
+      - 6379
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 1s
+      retries: 10
+
+  sidekiq:
+    <<: *backend
+    command: bundle exec sidekiq -C config/sidekiq.yml
+
 volumes:
   postgres:
   bundle:
@@ -149,3 +167,4 @@ volumes:
   rails_cache:
   packs:
   elasticsearch:
+  redis:
